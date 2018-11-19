@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda de Contatos</title>
+    <link rel="stylesheet" href="css/libs/materialize.min.css">
+    <link rel="stylesheet" href="css/libs/google-fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="label">Criar Contato</h1>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="first_name" type="text" class="validate" required>
+                        <label for="first_name">Nome</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate">
+                        <label for="last_name">Sobrenome</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="empresa" type="text" class="validate">
+                        <label for="empresa">Empresa</label>
+                    </div>
+                </div>
+                <div class="input-field col s6">
+                    <input id="cargo" type="text" class="validate">
+                    <label for="cargo">Cargo</label>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="telefone" type="tel" required>
+                        <br/>
+                        <label for="telefone">Telefone</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="observacao" type="text" class="validate">
+                        <br/>
+                        <label for="observacao">Observação</label>
+                    </div>
+                </div>
+                <input type="submit" name="salvar" class="btn-salvar" value="Salvar">
+                <input type="reset" name="cancelar" value="Cancelar">
+                <a id="btn-consultar" class="btn-floating btn-large waves-effect waves-light green">
+                    <i class="material-icons">assignment</i>
+                </a>
+                <a id="btn-atualizar" class="btn-floating btn-large waves-effect waves-light blue">
+                    <i class="material-icons">shuffle</i>
+                </a>
+                <a id="btn-deletar" class="waves-effect waves-light btn">Deletar</a>
+                <a id="btn-consultarTodos" class="waves-effect waves-light btn">Listar</a>
+            </form>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Empresa</th>
+                    <th>Cargo</th>
+                </tr>
+            </thead>
+
+            <tbody class="tabelaContato">
+            </tbody>
+        </table>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/materialize.js"></script>
+</body>
+
+</html>
