@@ -1,4 +1,4 @@
-const Contatos = require('../models/Cadastro.js')
+const Contatos = require('../models/Cadastro.js');
 
 module.exports = function(app) {
 
@@ -6,7 +6,7 @@ module.exports = function(app) {
     // Connecta ao banco
 
     app.post('/cadastrar', function(req, res) {
-        console.log('Recebida requisicao de teste na porta 3000.');
+        
 
         try {
 
@@ -25,12 +25,23 @@ module.exports = function(app) {
             item.date = new Date;
 
 
-            var data = new Contatos(item);
-            data.save()
+            // var data = new Contatos(item);
+            // data.save()
 
-            res.status(201).send({
-                "message": "Cadastro realizado com sucesso"
+            var contato = new app.repositories.ContatoCreateDB();
+
+            contato.salva(item, function(err,data,num){
+                if(err){
+
+                    res.status(400).send({err});
+                }else{
+                    res.status(201).send({
+                        data
+                     });
+                }
+                
             });
+
 
         } catch (e) {
             console.log(e);

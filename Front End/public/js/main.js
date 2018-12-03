@@ -3,6 +3,7 @@ $('#btn-consultar').on('click', consultarContato);
 $('#btn-atualizar').on('click', atualizarContato);
 $('#btn-deletar').on('click', deletarContato);
 $('#btn-consultarTodos').on('click', consultatTodos);
+$('#btn-cancelar').on('click', limparForm);
 
 function montarRequisicao() {
 
@@ -84,6 +85,8 @@ function deletarContato() {
 
 function consultatTodos() {
 
+    $('.tabelaContato').find('tr').remove();
+
     $.get('http://localhost:3000/contatos/consultar', function(response) {
 
         $(response).each(function() {
@@ -105,4 +108,8 @@ function novaLinha(data) {
     linha.append(cargo);
 
     return linha;
-}
+};
+
+function limparForm () {
+    $('.form-contato input').val("");
+  }
