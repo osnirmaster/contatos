@@ -31,8 +31,9 @@ function montarRequisicao() {
 function request() {
     var data = montarRequisicao();
     console.log("clicou");
-    $.post('http://localhost:3000/cadastrar', data, function() {
+    $.post('http://localhost:3000/contatos/incluir', data, function() {
         console.log(JSON.stringify(data));
+        limparForm();
     });
 }
 
@@ -92,13 +93,6 @@ function removerContatoLista(id){
     });
 }
 
-function removeLinha(event){
-    event.preventDefault();
-    var id = $('.idContato');
-    console.log("Teste : " + id.text());
-    removerContatoLista(id.text());
-    $(this).parent().parent().remove();
-}
 
 function consultatTodos() {
 
@@ -108,12 +102,23 @@ function consultatTodos() {
 
         $(response).each(function() {
             var linha = novaLinha(this);
+            var id = this._id;
+            console.log("Teste : " + id);
+
+            linha.find('.botaoRemover').click(removerContatoLista(id));
+
             linha.find('.botaoRemover').click(removeLinha);
 
             $('.tabelaContato').append(linha);
         });
     })
 }
+
+function removeLinha(event){
+    event.preventDefault();
+    $(this).parent().parent().remove();
+}
+
 
 function novaLinha(data) {
 
@@ -125,7 +130,7 @@ function novaLinha(data) {
     var colunaoAcao = $('<tr>');
 
     var link = $('<a>').attr("href","#").addClass("botaoRemover");
-    var icone = $('<i>').addClass("material-icons").text("edit");
+    var icone = $('<i>').addClass("material-icons").text("delete");
 
     link.append(icone);
 
