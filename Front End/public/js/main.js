@@ -5,6 +5,13 @@ $('#btn-deletar').on('click', deletarContato);
 $('#btn-consultarTodos').on('click', consultatTodos);
 $('#btn-cancelar').on('click', limparForm);
 
+$(function(){
+    $('.idContato').on('click',removerContatoLista);
+
+});
+
+
+
 function montarRequisicao() {
 
     var first_name = $('#first_name').val();
@@ -84,14 +91,6 @@ function deletarContato() {
     });
 }
 
-function removerContatoLista(id){
-
-    $.post('http://localhost:3000/contatos/excluir/' + id, function(response,status){
-
-        console.log("teste remocao: " +response + status);
-
-    });
-}
 
 
 function consultatTodos() {
@@ -105,13 +104,27 @@ function consultatTodos() {
             var id = this._id;
             console.log("Teste : " + id);
 
-            linha.find('.botaoRemover').click(removerContatoLista(id));
+            linha.find('.botaoRemover').on('click',removerContatoLista);
 
             linha.find('.botaoRemover').click(removeLinha);
 
             $('.tabelaContato').append(linha);
         });
     })
+};
+
+
+function removerContatoLista(){
+
+    var id = $(this).val();
+
+    console.log('Teste parent : ' + id);
+
+    $.post('http://localhost:3000/contatos/excluir/' + id, function(response,status){
+
+        console.log("teste remocao: " +response + status);
+
+     });
 }
 
 function removeLinha(event){
@@ -129,7 +142,7 @@ function novaLinha(data) {
     var cargo = $('<td>').text(data.cargo);
     var colunaoAcao = $('<tr>');
 
-    var link = $('<a>').attr("href","#").addClass("botaoRemover");
+    var link = $('<a>').attr("href","#").val(data._id).addClass("botaoRemover");
     var icone = $('<i>').addClass("material-icons").text("delete");
 
     link.append(icone);
