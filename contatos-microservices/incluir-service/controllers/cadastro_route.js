@@ -5,8 +5,8 @@ module.exports = function(app) {
 
     // Connecta ao banco
 
-    app.post('/cadastrar', function(req, res) {
-        
+    app.post('/contatos/incluir', function(req, res) {
+
 
         try {
 
@@ -30,16 +30,16 @@ module.exports = function(app) {
 
             var contato = new app.repositories.ContatoCreateDB();
 
-            contato.salva(item, function(err,data,num){
-                if(err){
+            contato.salva(item, function(err, data, num) {
+                if (err) {
 
-                    res.status(400).send({err});
-                }else{
+                    res.status(400).send({ err });
+                } else {
                     res.status(201).send({
                         data
-                     });
+                    });
                 }
-                
+
             });
 
 
