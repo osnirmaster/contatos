@@ -83,6 +83,23 @@ function deletarContato() {
     });
 }
 
+function removerContatoLista(id){
+
+    $.post('http://localhost:3000/contatos/excluir/' + id, function(response,status){
+
+        console.log("teste remocao: " +response + status);
+
+    });
+}
+
+function removeLinha(event){
+    event.preventDefault();
+    var id = $('.idContato');
+    console.log("Teste : " + id.text());
+    removerContatoLista(id.text());
+    $(this).parent().parent().remove();
+}
+
 function consultatTodos() {
 
     $('.tabelaContato').find('tr').remove();
@@ -91,6 +108,8 @@ function consultatTodos() {
 
         $(response).each(function() {
             var linha = novaLinha(this);
+            linha.find('.botaoRemover').click(removeLinha);
+
             $('.tabelaContato').append(linha);
         });
     })
@@ -99,13 +118,24 @@ function consultatTodos() {
 function novaLinha(data) {
 
     var linha = $('<tr>');
+    var id = $('<td>').addClass("idContato").text(data._id).hide();
     var nome = $('<td>').text(data.first_name);
     var empresa = $('<td>').text(data.empresa);
     var cargo = $('<td>').text(data.cargo);
+    var colunaoAcao = $('<tr>');
 
+    var link = $('<a>').attr("href","#").addClass("botaoRemover");
+    var icone = $('<i>').addClass("material-icons").text("edit");
+
+    link.append(icone);
+
+    colunaoAcao.append(link);
+
+    linha.append(id);
     linha.append(nome);
     linha.append(empresa);
     linha.append(cargo);
+    linha.append(colunaoAcao);
 
     return linha;
 };
